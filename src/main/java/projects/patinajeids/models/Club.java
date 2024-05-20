@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,16 +25,7 @@ public class Club {
     @Column(name = "cidade")
     private String ciudad;
 
-    @Column(name = "treinador")
-    private String entrenador;
-
-    @Column(name = "cpf_treinador")
-    private String ccEntrenador;
-
-    @Column(name = "telefone")
-    private String telefono;
-
-    @OneToMany
+    @ManyToMany
     @JoinTable(
         name = "treinadores_clubes",
         joinColumns = @JoinColumn(name = "id_treinador"),
@@ -65,30 +56,6 @@ public class Club {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
-    }
-
-    public String getEntrenador() {
-        return entrenador;
-    }
-
-    public void setEntrenador(String entrenador) {
-        this.entrenador = entrenador;
-    }
-
-    public String getCcEntrenador() {
-        return ccEntrenador;
-    }
-
-    public void setCcEntrenador(String ccEntrenador) {
-        this.ccEntrenador = ccEntrenador;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public List<Entrenador> getEntrenadores() {
