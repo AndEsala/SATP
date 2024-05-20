@@ -39,7 +39,7 @@ public class Deportista {
     private String sexo;
 
     @OneToOne
-    @JoinColumn(name = "id_club")
+    @JoinColumn(name = "id_clube")
     private Club club;
 
     @OneToOne
