@@ -14,19 +14,15 @@ public class Entrenador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "cpf")
     private String cedula;
-
-    @Column(name = "nome")
     private String nombre;
 
-    @Column(name = "p_sobrenome")
+    @Column(name = "p_apellido")
     private String primerApellido;
 
-    @Column(name = "s_sobrenome")
+    @Column(name = "s_apellido")
     private String segundoApellido;
 
-    @Column(name = "telefone")
     private String telefono;
 
     /* Getters & Setters */
