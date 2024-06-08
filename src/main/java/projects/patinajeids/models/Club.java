@@ -2,7 +2,6 @@ package projects.patinajeids.models;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,17 +18,14 @@ public class Club {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome")
     private String nombre;
-
-    @Column(name = "cidade")
     private String ciudad;
 
     @ManyToMany
     @JoinTable(
-        name = "treinadores_clubes",
-        joinColumns = @JoinColumn(name = "id_treinador"),
-        inverseJoinColumns = @JoinColumn(name = "id_club")
+        name = "entrenadores_clubes",
+        joinColumns = @JoinColumn(name = "id_club"),
+        inverseJoinColumns = @JoinColumn(name = "id_entrenador")
     )
     private List<Entrenador> entrenadores;
 
