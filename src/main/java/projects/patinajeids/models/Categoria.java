@@ -1,6 +1,5 @@
 package projects.patinajeids.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +13,9 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome")
     private String nombre;
-
-    @Column(name = "idade_min")
     private Integer edadMin;
-
-    @Column(name = "idade_max")
     private Integer edadMax;
-
-    @Column(name = "tipo_patin")
     private String tipoPatin;
 
     /* Getters & Setters */
