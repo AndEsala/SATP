@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,19 +30,15 @@ public class Deportista {
     @Column(name = "s_sobrenome")
     private String segundoApellido;
 
-    @Column(name = "data_nascimento")
     private Date fechaNacimiento;
-
-    @Column(name = "idade")
     private Integer edad;
-
     private String sexo;
 
-    @OneToOne
-    @JoinColumn(name = "id_clube")
+    @ManyToOne
+    @JoinColumn(name = "id_club")
     private Club club;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
