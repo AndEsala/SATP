@@ -41,6 +41,4 @@ public class Bateria {
     public void setDeportistas(List<Deportista> deportistas) {
         this.deportistas = deportistas;
     }
-
-    
 }
