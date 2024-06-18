@@ -17,6 +17,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "torneos")
@@ -26,18 +28,26 @@ public class Torneo {
     @Column(name = "id")
     private Integer idTorneo;
 
+    @NotBlank(message = "El nombre no puede estar vacío!")
     private String nombre;
+
+    @NotBlank(message = "La descripción no puede estar vacía!")
     private String descripcion;
 
+    @NotNull(message = "La fecha de inicio no puede estar vacía!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
 
+    @NotNull(message = "La fecha de fin no puede estar vacía!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
 
+    @NotBlank(message = "La ciudad no puede estar vacía!")
     private String ciudad;
+
+    @NotBlank(message = "El país no puede estar vacío!")
     private String tipo;
 
     @ManyToMany
