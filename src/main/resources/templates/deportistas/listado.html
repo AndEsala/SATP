@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="deportista : ${deportistas}" th:if="${deportista.Edad >= 20 && deportista.sexo == 'M'}">
+                <tr th:each="deportista : ${deportistas}">
                     <td th:text="${deportista.nombre + ' ' + deportista.pApellido + ' ' + deportista.sApellido}"></td>
                     <td th:text="${deportista.fechaNacimiento}"></td>
                     <td th:text="${deportista.Edad} + ' años'"></td>
