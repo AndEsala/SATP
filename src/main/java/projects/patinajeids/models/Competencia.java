@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "competencias")
@@ -15,8 +16,10 @@ public class Competencia {
     @Column(name = "id")
     private Integer idCompetencia;
 
+    @NotBlank(message = "Detalle el tipo de Competencia!")
     private String tipo;
 
+    /* Getters & Setters */
     public Integer getIdCompetencia() {
         return idCompetencia;
     }
@@ -32,6 +35,4 @@ public class Competencia {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-    
 }
