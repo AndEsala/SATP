@@ -1,22 +1,8 @@
-<!doctype html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
-
-</head>
-
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head.html :: head}"></head>
 <body>
+    <header th:insert="~{fragments/header.html :: header}"></header>
 
     <!-- Main Content -->
     <div class="container my-3">
@@ -26,53 +12,43 @@
             </span>
         </h1>
 
+        <a th:href="@{/deportistas/registrar}" class="btn btn-primary">
+            Registrar Deportista
+        </a>
 
+        <!-- Tabla de Deportistas -->
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
+                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Sexo</th>
                     <th scope="col">Club</th>
                     <th scope="col">Categoría</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Fecha de Nacimiento</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="deportista : ${deportistas}">
-                    <th scope="row" th:text="${deportista.id}"></th>
-                    <td th:text="${deportista.nombre}"></td>
-                    <td th:text="${deportista.primerApellido}"></td>
-                    <td th:text="${deportista.club.nombre}"></td>
-                    <td th:text="${deportista.categoria.nombre} + '-' + ${deportista.categoria.tipoPatin}"></td>
-                    <td th:text="${deportista.sexo}"></td>
+                <tr th:each="deportista : ${deportistas}" th:if="${deportista.Edad >= 20 && deportista.sexo == 'M'}">
+                    <td th:text="${deportista.nombre + ' ' + deportista.pApellido + ' ' + deportista.sApellido}"></td>
                     <td th:text="${deportista.fechaNacimiento}"></td>
+                    <td th:text="${deportista.Edad} + ' años'"></td>
+                    <td th:text="${deportista.sexo}"></td>
+                    <td th:text="${deportista.club.nombre}"></td>
+                    <td th:text="${deportista.categoria.edadMin + ' - ' + deportista.categoria.edadMax + ' años (' + deportista.categoria.tipoPatin + ')'}"></td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">
-                            <h6>Editar</h6>
                             <i class="fa-solid fa-pencil"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm">
-                            <h6>Eliminar</h6>
-                            <i class="fa-solid fa-trash"></i>
+                        <a href="#" class="btn btn-primary btn-sm">
+                            <i class="fa-solid fa-clipboard-list"></i>
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div class="text-center">
-            <a href="registro" class="btn btn-warning btn-sm">
-                <h6>Registrar Deportista</h6>
-                <i class="fa-solid fa-trash"></i>
-            </a>
-        </div>
-        
-        
-        
     </div>
-    
+    <!-- Fin - Main Content -->
 </body>
-
 </html>
