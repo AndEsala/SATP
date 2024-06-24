@@ -48,7 +48,7 @@ public class FinalizarTorneoTest {
         assertNotNull(clubCampeon, "Debe haber un club campeón");
 
         // Verificamos que el club campeón tiene puntos
-        assertTrue(ClubRepository.GetPuntosClub(idTorneo, clubCampeon.getIdClub()) > 0, "El club campeón debe tener puntos");
+        assertTrue(ClubRepository.getPuntosClub(idTorneo, clubCampeon.getIdClub()) > 0, "El club campeón debe tener puntos");
     }
     
 }
