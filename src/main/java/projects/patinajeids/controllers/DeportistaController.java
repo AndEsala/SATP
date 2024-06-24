@@ -1,10 +1,5 @@
 package projects.patinajeids.controllers;
 
-<<<<<<< HEAD
-public class DeportistaController {
-    
-}
-=======
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -76,4 +71,3 @@ public class DeportistaController {
         wdb.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
     }
 }
->>>>>>> 9c7d67a5bbcc1ecbe13129b735ff8f9a4224ab6d
