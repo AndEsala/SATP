@@ -100,4 +100,24 @@ public class TorneoController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         wdb.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
     }
+    /* Finalizar Torneo */
+    @GetMapping(value = "/finalizar/{idTorneo}")
+    public String finalizarTorneo(@PathVariable("idTorneo") Integer idTorneo, RedirectAttributes ra) {
+        Torneo torneo = torneoRepository.findById(idTorneo).orElse(null);
+        
+        if (torneo.getEstado() == false) {
+            // Torneo already finalized
+            ra.addFlashAttribute("mensaje", "El torneo ya está finalizado.");
+            return "redirect:/torneos/listado";
+        }
+        
+        torneo.setEstado(false);
+        torneoRepository.save(torneo);
+        
+        ra.addFlashAttribute("mensaje", "Torneo finalizado exitosamente.");
+        return "redirect:/torneos/listado";
+    }
+    
+    
+
 }

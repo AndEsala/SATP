@@ -16,6 +16,15 @@
             Crear Torneo
         </a>
 
+        <div th:if="${mensaje}" class="alert alert-success" role="alert">
+            <span th:text="${mensaje}"></span>
+        </div>
+        <script>
+            setTimeout(function() {
+            document.querySelector('.alert').style.display = 'none';
+            }, 2000);
+        </script>
+
         <!-- Tabla de Torneos -->
         <table class="table table-striped">
             <thead>
@@ -43,6 +52,10 @@
                         </a>
                         <a th:href="@{/torneos/{id} (id = ${torneo.idTorneo})}" class="btn btn-primary btn-sm">
                             <i class="fa-solid fa-clipboard-list"></i>
+                        </a>
+                        
+                        <a th:href="@{/torneos/finalizar/{id}(id = ${torneo.idTorneo})}" class="btn btn-secondary btn-sm">
+                            Finalizar
                         </a>
                     </td>
                 </tr>

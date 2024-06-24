@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -58,10 +57,14 @@ public class Torneo {
     )
     private List<Deportista> deportistas;
 
-    @OneToMany()
-    private List<Bateria> baterias;
-
     private Boolean estado;
+
+    /* Constructor */
+    public Torneo() {}
+
+    public Torneo(Integer idTorneo) {
+        this.idTorneo = idTorneo;
+    }
 
     /* Getters & Setters */
     public Integer getIdTorneo() {
@@ -126,14 +129,6 @@ public class Torneo {
 
     public void setDeportistas(List<Deportista> deportistas) {
         this.deportistas = deportistas;
-    }
-
-    public List<Bateria> getBaterias() {
-        return baterias;
-    }
-
-    public void setBaterias(List<Bateria> baterias) {
-        this.baterias = baterias;
     }
 
     public Boolean getEstado() {
