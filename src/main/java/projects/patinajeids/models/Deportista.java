@@ -1,6 +1,9 @@
 package projects.patinajeids.models;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,51 +11,67 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "deportistas")
 public class Deportista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private Integer idDeportista;
 
+    @NotBlank
     @Column(name = "doc_identidad")
     private String docIdentidad;
 
-    @Column(name = "nome")
+    @NotBlank(message = "El nombre no puede estar vacío!")
     private String nombre;
 
-    @Column(name = "p_sobrenome")
-    private String primerApellido;
+    @NotBlank(message = "El primer apellido no puede estar vacío!")
+    private String pApellido;
 
-    @Column(name = "s_sobrenome")
-    private String segundoApellido;
+    @NotBlank(message = "El segundo apellido no puede estar vacío!")
+    private String sApellido;
 
-    @Column(name = "data_nascimento")
+    @NotNull(message = "La fecha de nacimiento no puede estar vacía!")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
-
-    @Column(name = "idade")
+    
+    @NotNull(message = "La edad no puede estar vacía!")
     private Integer edad;
-
+    
+    @NotBlank(message = "El sexo no puede estar vacío!")
     private String sexo;
 
+    @NotNull(message = "Debe seleccionar un Club a representar!")
     @OneToOne
-    @JoinColumn(name = "id_clube")
+    @JoinColumn(name = "id_club")
     private Club club;
-
+    
+    @NotNull(message = "Debe seleccionar una categoría!")
     @OneToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
+    @OneToMany
+    @JoinColumn(name = "id_deportista", nullable = true)
+    private List<Participacion> participaciones;
+
     /* Getters & Setters */
-    public Integer getId() {
-        return id;
+    public Integer getIdDeportista() {
+        return idDeportista;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdDeportista(Integer idDeportista) {
+        this.idDeportista = idDeportista;
     }
 
     public String getDocIdentidad() {
@@ -71,20 +90,20 @@ public class Deportista {
         this.nombre = nombre;
     }
 
-    public String getPrimerApellido() {
-        return primerApellido;
+    public String getpApellido() {
+        return pApellido;
     }
 
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
+    public void setpApellido(String pApellido) {
+        this.pApellido = pApellido;
     }
 
-    public String getSegundoApellido() {
-        return segundoApellido;
+    public String getsApellido() {
+        return sApellido;
     }
 
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
+    public void setsApellido(String sApellido) {
+        this.sApellido = sApellido;
     }
 
     public Date getFechaNacimiento() {
@@ -125,5 +144,13 @@ public class Deportista {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Participacion> getParticipaciones() {
+        return participaciones;
+    }
+
+    public void setParticipaciones(List<Participacion> participaciones) {
+        this.participaciones = participaciones;
     }
 }

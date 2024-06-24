@@ -6,36 +6,38 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "treinadores")
 public class Entrenador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private Integer idEntrenador;
 
-    @Column(name = "cpf")
+    @NotBlank
     private String cedula;
 
-    @Column(name = "nome")
+    @NotBlank
     private String nombre;
 
-    @Column(name = "p_sobrenome")
-    private String primerApellido;
+    @NotBlank
+    private String pApellido;
 
-    @Column(name = "s_sobrenome")
-    private String segundoApellido;
+    @NotBlank
+    private String sApellido;
 
-    @Column(name = "telefone")
+    @NotBlank
     private String telefono;
 
     /* Getters & Setters */
-    public Integer getId() {
-        return id;
+    public Integer getIdEntrenador() {
+        return idEntrenador;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEntrenador(Integer idEntrenador) {
+        this.idEntrenador = idEntrenador;
     }
 
     public String getCedula() {
@@ -54,20 +56,20 @@ public class Entrenador {
         this.nombre = nombre;
     }
 
-    public String getPrimerApellido() {
-        return primerApellido;
+    public String getpApellido() {
+        return pApellido;
     }
 
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
+    public void setpApellido(String pApellido) {
+        this.pApellido = pApellido;
     }
 
-    public String getSegundoApellido() {
-        return segundoApellido;
+    public String getsApellido() {
+        return sApellido;
     }
 
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
+    public void setsApellido(String sApellido) {
+        this.sApellido = sApellido;
     }
 
     public String getTelefono() {

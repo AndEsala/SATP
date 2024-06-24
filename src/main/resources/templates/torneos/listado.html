@@ -8,37 +8,41 @@
     <div class="container my-3">
         <h1 class="text-center">
             <span class="badge bg-success">
-                Clubes Registrados
+                Torneos
             </span>
         </h1>
 
-        <a th:href="@{/clubes/registrar}" class="btn btn-primary">
-            Registrar Club
+        <a th:href="@{/torneos/crear}" class="btn btn-primary">
+            Crear Torneo
         </a>
 
-        <!-- Tabla de Clubes -->
+        <!-- Tabla de Torneos -->
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
                     <th scope="col">Ciudad</th>
-                    <th scope="col">Teléfono</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="club : ${clubes}">
-                    <th scope="row" th:text="${club.idClub}"></th>
-                    <td th:text="${club.nombre}"></td>
-                    <td th:text="${club.ciudad}"></td>
-                    <td th:text="${club.telefono}"></td>
+                <tr th:each="torneo : ${torneos}">
+                    <th scope="row" th:text="${torneo.idTorneo}"></th>
+                    <td th:text="${torneo.nombre}"></td>
+                    <td th:text="${torneo.descripcion}"></td>
+                    <td th:text="${torneo.ciudad}"></td>
+                    <td th:text="${torneo.tipo}"></td>
+                    <td th:text="${torneo.estado ? 'Activo' : 'Finalizado'}"></td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm">
-                            <i class="fa-solid fa-trash"></i>
+                        <a th:href="@{/torneos/{id} (id = ${torneo.idTorneo})}" class="btn btn-primary btn-sm">
+                            <i class="fa-solid fa-clipboard-list"></i>
                         </a>
                     </td>
                 </tr>

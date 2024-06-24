@@ -1,5 +1,6 @@
 package projects.patinajeids.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -9,37 +10,51 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "clubes")
 public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private Integer idClub;
 
-    @Column(name = "nome")
+    @NotBlank(message = "El nombre no puede estar vacío!")
     private String nombre;
 
-    @Column(name = "cidade")
+    @Email(message = "Email no válido!")
+    private String email;
+
+    @NotBlank(message = "El teléfono del entrenador no puede estar vacío!")
+    private String telefono;
+
+    @NotBlank(message = "La ciudad no puede estar vacía!")
     private String ciudad;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
-        name = "treinadores_clubes",
-        joinColumns = @JoinColumn(name = "id_treinador"),
-        inverseJoinColumns = @JoinColumn(name = "id_club")
+        name = "entrenadores_clubes",
+        joinColumns = @JoinColumn(name = "id_club"),
+        inverseJoinColumns = @JoinColumn(name = "id_entrenador")
     )
     private List<Entrenador> entrenadores;
 
-    /* Getters & Setters */
-    public Integer getId() {
-        return id;
+    /* Constructor */
+    public Club() {
+        this.entrenadores = new ArrayList<>();
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    /* Getters & Setters */
+    public Integer getIdClub() {
+        return idClub;
+    }
+
+    public void setIdClub(Integer idClub) {
+        this.idClub = idClub;
     }
 
     public String getNombre() {
@@ -48,6 +63,22 @@ public class Club {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getCiudad() {

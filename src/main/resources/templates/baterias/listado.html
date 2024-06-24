@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head.html :: head}"></head>
+<body>
+    <header th:insert="~{fragments/header.html :: header}"></header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Listado de baterías</h2>
+                <a class="btn btn-primary" th:href="@{/baterias/nuevo}">Nueva batería</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Torneo</th>
+                            <th>Deportistas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="bateria : ${baterias}">
+                            <td th:text="${bateria.idBateria}"></td>
+                            <td th:text="${bateria.torneo.nombre}"></td>
+                            <td>
+                                <ul>
+                                    <li th:each="deportista : ${bateria.deportistas}" th:text="${deportista.nombre + ' ' + deportista.pApellido + ' ' + deportista.sApellido}"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+</html>
