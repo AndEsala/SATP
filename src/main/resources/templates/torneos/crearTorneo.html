@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head.html :: head}"></head>
+<body>
+    <header th:insert="~{fragments/header.html :: header}"></header>
+
+    <!-- Main Content -->
+    <div class="container my-3">
+        <h1 class="text-center">
+            <span class="badge bg-success">
+                Crear Torneo
+            </span>
+        </h1>
+
+        <!-- Formulario de Creación de Torneo -->
+        <form th:action="@{/torneos/crear}" method="post" th:object="${torneo}">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" th:field="*{descripcion}" class="form-control">
+            </div>
+
+            <div class="d-flex justify-content-evenly my-3">
+                <div class="w-25 mx-2">
+                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                    <input type="date" th:field="*{fechaInicio}" class="form-control">
+                </div>
+    
+                <div class="w-25 mx-2">
+                    <label for="fechaFin" class="form-label">Fecha de Finalización</label>
+                    <input type="date" th:field="*{fechaFin}" class="form-control">
+                </div>
+    
+                <div class="w-25 mx-2">
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <input type="text" th:field="*{ciudad}" class="form-control">
+                </div>
+    
+                <div class="w-25 mx-2">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <input type="text" th:field="*{tipo}" class="form-control">
+                </div>
+            </div>
+
+            <input type="submit" value="Crear Torneo" class="btn btn-success">
+        </form>
+        <!-- Fin - Formulario de Creación de Torneo -->
+    </div>
+    <!-- Fin - Main Content -->
+</body>
+</html>
