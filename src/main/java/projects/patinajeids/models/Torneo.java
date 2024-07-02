@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -58,6 +59,10 @@ public class Torneo {
     private List<Deportista> deportistas;
 
     private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "club_organizador")
+    private Club organizador;
 
     /* Constructor */
     public Torneo() {}
@@ -139,5 +144,11 @@ public class Torneo {
         this.estado = estado;
     }
 
-    
+    public Club getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Club organizador) {
+        this.organizador = organizador;
+    }
 }

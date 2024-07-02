@@ -1,7 +1,11 @@
 package projects.patinajeids.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -19,10 +23,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import projects.patinajeids.models.Competencia;
+import projects.patinajeids.models.DeportistasHasBaterias;
 import projects.patinajeids.models.Inscripcion;
 import projects.patinajeids.models.Torneo;
-import projects.patinajeids.repositorios.BateriaRepository;
 import projects.patinajeids.repositorios.CompetenciaRepository;
+import projects.patinajeids.repositorios.DeportistasHasBateriasRepository;
 import projects.patinajeids.repositorios.TorneoRepository;
 
 @Controller
@@ -35,7 +40,7 @@ public class TorneoController {
     private CompetenciaRepository competenciaRepository;
 
     @Autowired
-    private BateriaRepository bateriaRepository;
+    private DeportistasHasBateriasRepository deportistasHasBateriasRepository;
 
     /* Listado de Torneos */
     @GetMapping(value = "/listado")
@@ -83,7 +88,25 @@ public class TorneoController {
 
         model.addAttribute("torneo", torneo);
         model.addAttribute("competencia", competencia);
-        model.addAttribute("baterias", bateriaRepository.findByTorneo(idTorneo));
+        
+        List<DeportistasHasBaterias> deportistasHasBaterias = deportistasHasBateriasRepository.findAll();
+        Map<Integer, List<DeportistasHasBaterias>> baterias = new HashMap<>();
+        
+        for (DeportistasHasBaterias dHasBaterias : deportistasHasBaterias) {
+            Integer bateriaId = dHasBaterias.getdHasBateriasId().getBateria().getIdBateria();
+            
+            if (baterias.containsKey(bateriaId)) {
+                baterias.get(bateriaId).add(dHasBaterias);
+            } else {
+                List<DeportistasHasBaterias> deportistas = new ArrayList<>();
+                deportistas.add(dHasBaterias);
+                
+                baterias.put(bateriaId, deportistas);
+            }
+        }
+
+        model.addAttribute("baterias", baterias);
+
         return "torneos/verResultados";
     }
 

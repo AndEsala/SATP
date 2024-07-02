@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import projects.patinajeids.models.Club;
 
 public interface ClubRepository extends JpaRepository<Club, Integer> {
-
     @Query(value = "SELECT * FROM clubes c WHERE id = clubCampeon(:idTorneo)", nativeQuery = true)
     Optional<Club> findByIdChampion(Integer idTorneo);
     
@@ -21,4 +20,7 @@ public interface ClubRepository extends JpaRepository<Club, Integer> {
 
     @Query(value = "SELECT SUM(pago) FROM inscripciones WHERE id_torneo = :idTorneo AND id_club = :idClub", nativeQuery = true)
 	Float getTotalPagos(Integer idTorneo, Integer idClub);
+
+    @Query(value = "SELECT COUNT(id_deportista) FROM inscripciones WHERE id_torneo = :idTorneo AND id_club = :idClub", nativeQuery = true)
+    Integer getNumeroDeportistasInscritos(Integer idTorneo, Integer idClub);
 }

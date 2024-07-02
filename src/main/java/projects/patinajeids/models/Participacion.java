@@ -10,7 +10,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "participaiones")
+@Table(name = "participaciones")
 public class Participacion {
     @EmbeddedId
     private ParticipacionId id;

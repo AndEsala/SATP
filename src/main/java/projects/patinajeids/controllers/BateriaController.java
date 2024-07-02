@@ -1,5 +1,9 @@
 package projects.patinajeids.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,21 +13,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import projects.patinajeids.repositorios.BateriaRepository;
+import projects.patinajeids.models.DeportistasHasBaterias;
+import projects.patinajeids.repositorios.DeportistasHasBateriasRepository;
 import projects.patinajeids.services.BateriaService;
 
 @Controller
 @RequestMapping("/baterias")
 public class BateriaController {
     @Autowired
-    private BateriaRepository bateriaRepository;
+    private BateriaService bateriaService;
 
     @Autowired
-    private BateriaService bateriaService;
+    private DeportistasHasBateriasRepository deportistasHasBateriasRepository;
 
     @GetMapping("/listado")
     public String listado(Model model) {
-        model.addAttribute("baterias", bateriaRepository.findAll());
+        List<DeportistasHasBaterias> deportistasHasBaterias = deportistasHasBateriasRepository.findAll();
+        Map<Integer, List<DeportistasHasBaterias>> baterias = new HashMap<>();
+        
+        for (DeportistasHasBaterias dHasBaterias : deportistasHasBaterias) {
+            int bateriaId = dHasBaterias.getdHasBateriasId().getBateria().getIdBateria();
+            if (!baterias.containsKey(bateriaId)) {
+                baterias.put(bateriaId, List.of(dHasBaterias));
+            } else {
+                baterias.get(bateriaId).add(dHasBaterias);
+            }
+        }
+
+        model.addAttribute("baterias", baterias);
         return "baterias/listado";
     }
 

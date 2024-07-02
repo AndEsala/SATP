@@ -22,19 +22,19 @@
                     </thead>
                     <tbody>
                         <tr th:each="bateria : ${baterias}">
-                            <td class="text-center align-middle" th:text="${bateria.idBateria}"></td>
+                            <td class="text-center align-middle" th:text="${bateria.key}"></td>
                             <td colspan="2">
                                 <table class="table table-striped">
                                     <tbody>
-                                        <tr th:each="deportista : ${bateria.deportistas}">
-                                            <td th:text="${deportista.nombre + ' ' + deportista.pApellido + ' ' + deportista.sApellido}"></td>
-                                            <td th:each="punto : ${deportista.participaciones}" th:if="${punto.id.competencia.idCompetencia == competencia.idCompetencia}" th:text="${'Posición: ' + punto.posicion + ' - Puntos: ' + punto.puntos + ' - Tiempo: ' + punto.tiempo}"></td>
+                                        <tr th:each="deportista : ${bateria.value}">
+                                            <td th:text="${deportista.dHasBateriasId.deportista.nombre + ' ' + deportista.dHasBateriasId.deportista.pApellido + ' ' + deportista.dHasBateriasId.deportista.sApellido}"></td>
+                                            <td th:each="punto : ${deportista.dHasBateriasId.deportista.participaciones}" th:if="${punto.id.competencia.idCompetencia == competencia.idCompetencia}" th:text="${'Posición: ' + punto.posicion + ' - Puntos: ' + punto.puntos + ' - Tiempo: ' + punto.tiempo}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </td>
                             <td class="text-center align-middle">
-                                <a class="btn btn-warning" th:href="@{/torneos/{idTorneo}/{idCompetencia}/{idBateria} (idTorneo = ${torneo.idTorneo}, idCompetencia = ${competencia.idCompetencia}, idBateria = ${bateria.idBateria})}">
+                                <a class="btn btn-warning" th:href="@{/torneos/{idTorneo}/{idCompetencia}/{idBateria} (idTorneo = ${torneo.idTorneo}, idCompetencia = ${competencia.idCompetencia}, idBateria = ${bateria.key})}">
                                     <i class="fa-solid fa-pencil"></i>
                                 </a>
                             </td>

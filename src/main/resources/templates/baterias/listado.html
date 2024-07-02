@@ -19,11 +19,11 @@
                     </thead>
                     <tbody>
                         <tr th:each="bateria : ${baterias}">
-                            <td th:text="${bateria.idBateria}"></td>
-                            <td th:text="${bateria.torneo.nombre}"></td>
+                            <td th:text="${bateria.key}"></td>
+                            <td th:text="${bateria.value.dHasBateriasId.bateria.torneo.nombre}"></td>
                             <td>
                                 <ul>
-                                    <li th:each="deportista : ${bateria.deportistas}" th:text="${deportista.nombre + ' ' + deportista.pApellido + ' ' + deportista.sApellido}"></li>
+                                    <li th:each="deportista : ${bateria.value}" th:text="${deportista.dHasBateriasId.deportista.nombre + ' ' + deportista.dHasBateriasId.deportista.pApellido + ' ' + deportista.dHasBateriasId.deportista.sApellido}"></li>
                                 </ul>
                             </td>
                         </tr>
