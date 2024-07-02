@@ -46,6 +46,18 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label for="club" class="form-label">Club Organizador</label>
+
+                <!-- Seleccionar Club Organizador -->
+                <select th:field="*{organizador.idClub}" class="form-select">
+                    <option th:each="club : ${clubes}"
+                            th:value="${club.idClub}"
+                            th:text="${club.nombre}">
+                    </option>
+                </select>
+            </div>
+
             <input type="submit" value="Crear Torneo" class="btn btn-success">
         </form>
         <!-- Fin - Formulario de Creación de Torneo -->

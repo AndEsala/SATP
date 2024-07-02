@@ -1,5 +1,6 @@
 package projects.patinajeids.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +65,11 @@ public class Deportista {
     @OneToMany
     @JoinColumn(name = "id_deportista", nullable = true)
     private List<Participacion> participaciones;
+
+    /* Constructor */
+    public Deportista() {
+        this.participaciones = new ArrayList<>();
+    }
 
     /* Getters & Setters */
     public Integer getIdDeportista() {

@@ -26,6 +26,7 @@ import projects.patinajeids.models.Competencia;
 import projects.patinajeids.models.DeportistasHasBaterias;
 import projects.patinajeids.models.Inscripcion;
 import projects.patinajeids.models.Torneo;
+import projects.patinajeids.repositorios.ClubRepository;
 import projects.patinajeids.repositorios.CompetenciaRepository;
 import projects.patinajeids.repositorios.DeportistasHasBateriasRepository;
 import projects.patinajeids.repositorios.TorneoRepository;
@@ -35,6 +36,9 @@ import projects.patinajeids.repositorios.TorneoRepository;
 public class TorneoController {
     @Autowired
     private TorneoRepository torneoRepository;
+
+    @Autowired
+    private ClubRepository clubRepository;
 
     @Autowired
     private CompetenciaRepository competenciaRepository;
@@ -51,7 +55,8 @@ public class TorneoController {
 
     /* Mostrar formulario para Crear Torneo */
     @GetMapping(value = "/crear")
-    public String crear(Torneo torneo) {
+    public String crear(Torneo torneo, Model model) {
+        model.addAttribute("clubes", clubRepository.findAll());
         return "torneos/crearTorneo";
     }
 

@@ -33,6 +33,11 @@
 
             <div class="row">
                 <div class="mb-3 col-md-4">
+                    <label for="docIdentidad" class="form-label">Documento de Identidad</label>
+                    <input type="text" th:field="*{docIdentidad}" class="form-control">
+                </div>
+
+                <div class="mb-3 col-md-4">
                     <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
                     <input type="date" th:field="*{fechaNacimiento}" class="form-control">
                 </div>
@@ -41,7 +46,9 @@
                     <label for="edad" class="form-label">Edad</label>
                     <input type="number" th:field="*{edad}" class="form-control">
                 </div>
+            </div>
 
+            <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="sexo" class="form-label">Sexo</label>
                     <select class="form-select" th:field="*{sexo}">
@@ -49,17 +56,15 @@
                         <option value="F">Femenino</option>
                       </select>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="mb-3 col-md-6">
+                <div class="mb-3 col-md-4">
                     <label for="club" class="form-label">Club</label>
                     <select class="form-select" th:field="*{club.idClub}">
                         <option th:each="club : ${clubes}" th:value="${club.idClub}" th:text="${club.nombre}"></option>
                       </select>
                 </div>
     
-                <div class="mb-3 col-md-6">
+                <div class="mb-3 col-md-4">
                     <label for="categoria" class="form-label">Categoría</label>
                     <select class="form-select" th:field="*{categoria.idCategoria}">
                         <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}" th:text="${categoria.edadMin + ' - ' + categoria.edadMax + ' años (' + categoria.tipoPatin + ')'}"></option>
