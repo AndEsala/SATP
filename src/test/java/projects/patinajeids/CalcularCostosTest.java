@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import projects.patinajeids.models.Club;
 import projects.patinajeids.repositorios.ClubRepository;
 
-
 @SpringBootTest
 public class CalcularCostosTest {
     @Autowired
@@ -35,9 +34,7 @@ public class CalcularCostosTest {
         
         costos.forEach((club, totalPagos) -> {
             Assertions.assertThat(totalPagos).isGreaterThan(0);
-            assertEquals(totalPagos, nDeportistas.get(club) * 5000);
+            assertEquals(totalPagos, nDeportistas.get(club) * 50000);
         });
-
-
     }
 }
