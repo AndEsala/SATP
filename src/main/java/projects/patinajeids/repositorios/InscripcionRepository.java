@@ -11,8 +11,10 @@ import projects.patinajeids.models.InscripcionId;
 public interface InscripcionRepository extends JpaRepository<Inscripcion, InscripcionId> {
     @Query(value = "SELECT * FROM inscripciones WHERE id_torneo = ?1", nativeQuery = true)
     List<Inscripcion> findByTorneoId(Integer idTorneo);
+    
+    @Query(value = "SELECT COUNT(*) FROM inscripciones WHERE id_torneo = ?1", nativeQuery = true)
+    Integer countByTorneoId(Integer idTorneo);
 
-    /* Obtener la última inscripción de un torneo */
     @Query(value = "SELECT * FROM inscripciones WHERE id_torneo = ?1 ORDER BY numero DESC LIMIT 1", nativeQuery = true)
     Inscripcion findLastByTorneoId(Integer idTorneo);
 
