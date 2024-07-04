@@ -171,7 +171,8 @@ public class TorneoController {
             return "redirect:/torneos/" + String.valueOf(idTorneo) + "/inscripciones";
         }
 
-        Integer inscripcionCount = inscripcionRepository.findLastByTorneoId(idTorneo).getNumero();
+        Integer inscripcionCount = inscripcionRepository.countByTorneoId(idTorneo);
+        Integer lastNum = (inscripcionCount == 0) ? 0 : inscripcionRepository.findLastByTorneoId(idTorneo).getNumero();
 
         Inscripcion inscripcion = new Inscripcion();
         InscripcionId id = new InscripcionId();
@@ -183,7 +184,7 @@ public class TorneoController {
         inscripcion.setId(id);
         inscripcion.setFechaInscripcion(new Date());
         inscripcion.setPago(50000);
-        inscripcion.setNumero(inscripcionCount + 1);
+        inscripcion.setNumero(lastNum + 1);
 
         inscripcionRepository.save(inscripcion);
         ra.addFlashAttribute("success", "Deportista inscrito exitosamente.");
