@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +25,10 @@ import projects.patinajeids.repositorios.EntrenadorRepository;
 
 @Controller
 @RequestMapping(value = "/clubes")
+@SessionAttributes(
+    names = { "club" },
+    types = { Club.class }
+)
 public class ClubController {
     @Autowired
     private ClubRepository clubRepository;
@@ -31,13 +38,25 @@ public class ClubController {
 
     /* Listado de Clubes Registrados */
     @GetMapping(value = "/listado")
-    public String listado(Model model) {
+    public String listado(Model model, SessionStatus sessionStatus) {
+        if (!sessionStatus.isComplete()) {
+            sessionStatus.setComplete();
+        }
+
         model.addAttribute("clubes", clubRepository.findAll());
         return "clubes/listado";
     }
 
     @GetMapping(value = "/registrar")
     public String formRegister(Club club) {
+        return "clubes/crearClub";
+    }
+
+    /* Editar Club */
+    @GetMapping(value = "/editar/{idClub}")
+    public String editar(@PathVariable("idClub") Integer idClub, Model model) {
+        Club club = clubRepository.findById(idClub).get();
+        model.addAttribute("club", club);
         return "clubes/crearClub";
     }
 

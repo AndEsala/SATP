@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import projects.patinajeids.models.DeportistasHasBaterias;
 import projects.patinajeids.repositorios.DeportistasHasBateriasRepository;
@@ -44,9 +43,10 @@ public class BateriaController {
         return "baterias/listado";
     }
 
-    @PostMapping("/generar")
-    public ResponseEntity<?> generarBaterias(@RequestParam int torneoId) {
-        bateriaService.generarBaterias(torneoId);
-        return ResponseEntity.ok("Baterías generadas correctamente");
+    @GetMapping("/generar/{idTorneo}")
+    public String generarBaterias(@PathVariable Integer idTorneo, RedirectAttributes attr) {
+        bateriaService.generarBaterias(idTorneo);
+        attr.addFlashAttribute("success", "Baterías generadas correctamente");
+        return "redirect:/torneos/" + String.valueOf(idTorneo);
     }
 }

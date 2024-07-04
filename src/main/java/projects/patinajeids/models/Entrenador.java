@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "treinadores")
+@Table(name = "entrenadores")
 public class Entrenador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

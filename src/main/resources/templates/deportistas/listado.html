@@ -38,11 +38,8 @@
                     <td th:text="${deportista.club.nombre}"></td>
                     <td th:text="${deportista.categoria.edadMin + ' - ' + deportista.categoria.edadMax + ' años (' + deportista.categoria.tipoPatin + ')'}"></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm">
+                        <a th:href="@{/deportistas/editar/{id} (id = ${deportista.idDeportista})}" class="btn btn-warning btn-sm">
                             <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-primary btn-sm">
-                            <i class="fa-solid fa-clipboard-list"></i>
                         </a>
                     </td>
                 </tr>

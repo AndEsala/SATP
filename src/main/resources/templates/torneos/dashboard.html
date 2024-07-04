@@ -55,7 +55,12 @@
                     
                     <h4 class="text-center">Deportistas Inscritos</h4>
 
-                    <a th:href="@{/torneos/{idTorneo}/inscripciones (idTorneo = ${torneo.idTorneo})}" class="btn btn-primary">Inscribir Deportista</a>
+                    <div class="d-flex justify-content-between">
+                        <a th:href="@{/torneos/{idTorneo}/inscripciones (idTorneo = ${torneo.idTorneo})}" class="btn btn-primary">Inscribir Deportista</a>
+                        <a th:href="@{/baterias/generar/{idTorneo} (idTorneo = ${torneo.idTorneo})}" class="btn btn-primary">Generar Baterías</a>
+                    </div>
+
+                    <div th:if="${success != null}" class="alert alert-success my-3" th:text="${success}"></div>
 
                     <table class="table table-striped">
                         <thead>

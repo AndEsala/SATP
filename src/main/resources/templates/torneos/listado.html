@@ -47,7 +47,7 @@
                     <td th:text="${torneo.tipo}"></td>
                     <td th:text="${torneo.estado ? 'Activo' : 'Finalizado'}"></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm">
+                        <a th:href="@{/torneos/editar/{id} (id = ${torneo.idTorneo})}" class="btn btn-warning btn-sm">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
                         <a th:href="@{/torneos/{id} (id = ${torneo.idTorneo})}" class="btn btn-primary btn-sm">
